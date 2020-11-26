@@ -97,9 +97,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010091416463_Init.cs" />
-    <Compile Include="Migrations\202010091416463_Init.designer.cs">
-      <DependentUpon>202010091416463_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202010261441098_Image.cs" />
+    <Compile Include="Migrations\202010261441098_Image.designer.cs">
+      <DependentUpon>202010261441098_Image.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Monster.cs" />
@@ -129,8 +129,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010091416463_Init.resx">
-      <DependentUpon>202010091416463_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010261441098_Image.resx">
+      <DependentUpon>202010261441098_Image.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

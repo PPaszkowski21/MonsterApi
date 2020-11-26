@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kck_FirstProject.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,5 +19,7 @@ namespace Kck_FirstProject.ViewModels.Home.Requests
         public int MovementSpeed { get; set; }
         [Required]
         public bool SeeingInvisible { get; set; }
+        public string ImageLink { get; set; }
+       
     }
 }

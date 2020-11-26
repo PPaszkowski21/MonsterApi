@@ -7,13 +7,13 @@ namespace Kck_FirstProject.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class Image : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Image));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010091416463_Init"; }
+            get { return "202010261441098_Image"; }
         }
         
         string IMigrationMetadata.Source

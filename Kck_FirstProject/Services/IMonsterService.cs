@@ -7,10 +7,10 @@ namespace Kck_FirstProject.Services
 {
     public interface IMonsterService
     {
-        ServiceResponse Add(MonsterAddRequest Monster);
+        ServiceResponse<MonsterResponse> Add(MonsterAddRequest Monster);
         ServiceResponse<IEnumerable<MonsterResponse>> Read();
         ServiceResponse<MonsterResponse> ReadById(int id);
-        ServiceResponse Update(MonsterUpdateRequest monster);
+        ServiceResponse<MonsterResponse> Update(MonsterUpdateRequest monster);
         ServiceResponse Delete(int id);
     }
 }

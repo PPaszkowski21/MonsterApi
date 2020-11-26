@@ -16,13 +16,13 @@ namespace Kck_FirstProject.Services
 
         }
 
-        public ServiceResponse Add(MonsterAddRequest monster)
+        public ServiceResponse<MonsterResponse> Add(MonsterAddRequest monster)
         {
             using (MonstersContext db = new MonstersContext())
             {
-                db.Monsters.Add(new Monster(monster));
+                Monster _monster = db.Monsters.Add(new Monster(monster));
                 db.SaveChanges();
-                return new ServiceResponse(HttpStatusCode.Created, "Monster added succesfully!");
+                return new ServiceResponse<MonsterResponse>(new MonsterResponse(_monster),HttpStatusCode.OK, "Monster added succesfully!");
             }
         }
 
@@ -43,49 +43,57 @@ namespace Kck_FirstProject.Services
 
         public ServiceResponse<MonsterResponse> ReadById(int id)
         {
-            Monster monster;
-            MonsterResponse monster2;
+            MonsterResponse monster;
             using (MonstersContext db = new MonstersContext())
             {
                 if (!db.Monsters.Any(x => x.Id == id))
                 {
                     return new ServiceResponse<MonsterResponse>(null, HttpStatusCode.NotFound, "There is not existing monster with given id!");
                 }
-                monster = db.Monsters.FirstOrDefault(x => x.Id == id);
-                monster2 = new MonsterResponse(monster);
+                monster = new MonsterResponse(db.Monsters.FirstOrDefault(x => x.Id == id));
             }
-            return new ServiceResponse<MonsterResponse>(monster2,HttpStatusCode.OK, "Monster downloaded!");
+            return new ServiceResponse<MonsterResponse>(monster,HttpStatusCode.OK, "Monster downloaded!");
         }
 
-        public ServiceResponse Update(MonsterUpdateRequest monster)
+        public ServiceResponse<MonsterResponse> Update(MonsterUpdateRequest monster)
         {
             using (MonstersContext db = new MonstersContext())
             {
-                
-                var monsterToUpdate = db.Monsters.FirstOrDefault(x => x.Id == monster.Id);
-                if (monster.HP.HasValue)
+                try
                 {
-                    monsterToUpdate.HP = monster.HP.Value;
+                    var monsterToUpdate = db.Monsters.FirstOrDefault(x => x.Id == monster.Id);
+                    if (monster.HP.HasValue)
+                    {
+                        monsterToUpdate.HP = monster.HP.Value;
+                    }
+                    if (monster.Exp.HasValue)
+                    {
+                        monsterToUpdate.Exp = monster.Exp.Value;
+                    }
+                    if (!string.IsNullOrEmpty(monster.Name))
+                    {
+                        monsterToUpdate.Name = monster.Name;
+                    }
+                    if (monster.MovementSpeed.HasValue)
+                    {
+                        monsterToUpdate.MovementSpeed = monster.MovementSpeed.Value;
+                    }
+                    if (monster.SeeingInvisible != null)
+                    {
+                        monsterToUpdate.SeeingInvisible = monster.SeeingInvisible.Value;
+                    }
+                    if (!string.IsNullOrEmpty(monster.ImageLink))
+                    {
+                        monsterToUpdate.ImageLink = monster.ImageLink;
+                    }
+                    db.SaveChanges();
+                    return new ServiceResponse<MonsterResponse>(new MonsterResponse(monsterToUpdate),HttpStatusCode.OK, "Monster updated succesfully!");
                 }
-                if (monster.Exp.HasValue)
+                catch (Exception ex)
                 {
-                    monsterToUpdate.Exp = monster.Exp.Value;
+                    return new ServiceResponse<MonsterResponse>(null,HttpStatusCode.NotFound, "There isn't existing monster with given id");
                 }
-                if (!string.IsNullOrEmpty(monster.Name))
-                {
-                    monsterToUpdate.Name = monster.Name;
-                }
-                if (monster.MovementSpeed.HasValue)
-                {
-                    monsterToUpdate.MovementSpeed = monster.MovementSpeed.Value;
-                }
-                if (monster.SeeingInvisible != null)
-                {
-                    monsterToUpdate.SeeingInvisible = monster.SeeingInvisible.Value;
-                }
-                db.SaveChanges(); 
             }
-                return new ServiceResponse(HttpStatusCode.Created, "Monster updated succesfully!");
         }
         public ServiceResponse Delete(int id)
         {

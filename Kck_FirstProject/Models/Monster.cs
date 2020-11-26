@@ -9,6 +9,15 @@ namespace Kck_FirstProject.Models
 {
     public class Monster
     {
+        public Monster(string name, int exp, int hp, int ms, bool inv, string il)
+        {
+            this.Name = name;
+            this.Exp = exp;
+            this.HP = hp;
+            this.MovementSpeed = ms;
+            this.SeeingInvisible = inv;
+            this.ImageLink = il;
+        }
         public Monster(string name, int exp, int hp, int ms, bool inv)
         {
             this.Name = name;
@@ -29,6 +38,7 @@ namespace Kck_FirstProject.Models
             this.HP = monster.HP;
             this.MovementSpeed = monster.MovementSpeed;
             this.SeeingInvisible = monster.SeeingInvisible;
+            this.ImageLink = monster.ImageLink;
 
         }
 
@@ -39,6 +49,7 @@ namespace Kck_FirstProject.Models
             this.HP = monster.HP;
             this.MovementSpeed = monster.MovementSpeed;
             this.SeeingInvisible = monster.SeeingInvisible;
+            this.ImageLink = monster.ImageLink;
 
         }
         public int Id { get; set; }
@@ -47,6 +58,6 @@ namespace Kck_FirstProject.Models
         public int HP { get; set; }
         public int MovementSpeed { get; set; }
         public bool SeeingInvisible { get; set; }
-
+        public string ImageLink { get; set; }
     }
 }

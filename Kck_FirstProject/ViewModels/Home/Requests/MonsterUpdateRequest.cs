@@ -15,5 +15,6 @@ namespace Kck_FirstProject.ViewModels.Home.Requests
         public int? HP { get; set; }
         public int? MovementSpeed { get; set; }
         public bool? SeeingInvisible { get; set; }
+        public string ImageLink { get; set; }
     }
 }
